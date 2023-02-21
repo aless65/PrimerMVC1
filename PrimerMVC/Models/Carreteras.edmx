@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CarreterasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbDepartamentos">
+          <Key>
+            <PropertyRef Name="dep_Id" />
+          </Key>
+          <Property Name="dep_Id" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="dep_Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dep_UsuCreacion" Type="int" Nullable="false" />
+          <Property Name="dep_FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="dep_UsuModificacion" Type="int" />
+          <Property Name="dep_FechaModificacion" Type="datetime" />
+          <Property Name="dep_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbMunicipios">
+          <Key>
+            <PropertyRef Name="mun_id" />
+          </Key>
+          <Property Name="mun_id" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="mun_Nombre" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="dep_Id" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="mun_UsuCreacion" Type="int" Nullable="false" />
+          <Property Name="mun_FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="mun_UsuModificacion" Type="int" />
+          <Property Name="mun_FechaModificacion" Type="datetime" />
+          <Property Name="mun_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usu_NombreUsuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="usu_Nombres" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="usu_Apellidos" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="usu_Contrasena" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="usu_UsuCreacion" Type="int" Nullable="false" />
+          <Property Name="usu_FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="usu_UsuModificacion" Type="int" />
+          <Property Name="usu_FechaModificacion" Type="datetime" />
+          <Property Name="usu_EsAdmin" Type="bit" Nullable="false" />
+          <Property Name="usu_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_tbMunicipios_tbDepartamentos_dep_Id">
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="1" />
+          <End Role="tbMunicipios" Type="Self.tbMunicipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamentos">
+              <PropertyRef Name="dep_Id" />
+            </Principal>
+            <Dependent Role="tbMunicipios">
+              <PropertyRef Name="dep_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="dep_UsuCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="0..1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="dep_UsuModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbMunicipios" Type="Self.tbMunicipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbMunicipios">
+              <PropertyRef Name="mun_UsuCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="0..1" />
+          <End Role="tbMunicipios" Type="Self.tbMunicipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbMunicipios">
+              <PropertyRef Name="mun_UsuModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbUsuarios1" Type="Self.tbUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbUsuarios1">
+              <PropertyRef Name="usu_UsuCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="0..1" />
+          <End Role="tbUsuarios1" Type="Self.tbUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbUsuarios1">
+              <PropertyRef Name="usu_UsuModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarreterasModelStoreContainer">
+          <EntitySet Name="tbDepartamentos" EntityType="Self.tbDepartamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbMunicipios" EntityType="Self.tbMunicipios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_tbMunicipios_tbDepartamentos_dep_Id" Association="Self.FK_dbo_tbMunicipios_tbDepartamentos_dep_Id">
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+            <End Role="tbMunicipios" EntitySet="tbMunicipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id" Association="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id" Association="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id" Association="Self.FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbMunicipios" EntitySet="tbMunicipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id" Association="Self.FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbMunicipios" EntitySet="tbMunicipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id" Association="Self.FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbUsuarios1" EntitySet="tbUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id" Association="Self.FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbUsuarios1" EntitySet="tbUsuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarreterasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbDepartamentos">
+          <Key>
+            <PropertyRef Name="dep_Id" />
+          </Key>
+          <Property Name="dep_Id" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dep_Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dep_UsuCreacion" Type="Int32" Nullable="false" />
+          <Property Name="dep_FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dep_UsuModificacion" Type="Int32" />
+          <Property Name="dep_FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="dep_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbMunicipios" Relationship="Self.FK_dbo_tbMunicipios_tbDepartamentos_dep_Id" FromRole="tbDepartamentos" ToRole="tbMunicipios" />
+          <NavigationProperty Name="tbUsuarios" Relationship="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id" FromRole="tbDepartamentos" ToRole="tbUsuarios" />
+          <NavigationProperty Name="tbUsuarios1" Relationship="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id" FromRole="tbDepartamentos" ToRole="tbUsuarios" />
+        </EntityType>
+        <EntityType Name="tbMunicipios">
+          <Key>
+            <PropertyRef Name="mun_id" />
+          </Key>
+          <Property Name="mun_id" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="mun_Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dep_Id" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="mun_UsuCreacion" Type="Int32" Nullable="false" />
+          <Property Name="mun_FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mun_UsuModificacion" Type="Int32" />
+          <Property Name="mun_FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="mun_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbDepartamentos" Relationship="Self.FK_dbo_tbMunicipios_tbDepartamentos_dep_Id" FromRole="tbMunicipios" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbUsuarios" Relationship="Self.FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id" FromRole="tbMunicipios" ToRole="tbUsuarios" />
+          <NavigationProperty Name="tbUsuarios1" Relationship="Self.FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id" FromRole="tbMunicipios" ToRole="tbUsuarios" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usu_NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usu_Nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usu_Apellidos" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usu_Contrasena" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usu_UsuCreacion" Type="Int32" Nullable="false" />
+          <Property Name="usu_FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usu_UsuModificacion" Type="Int32" />
+          <Property Name="usu_FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="usu_EsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="usu_Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbDepartamentos" Relationship="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id" FromRole="tbUsuarios" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbDepartamentos1" Relationship="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id" FromRole="tbUsuarios" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbMunicipios" Relationship="Self.FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id" FromRole="tbUsuarios" ToRole="tbMunicipios" />
+          <NavigationProperty Name="tbMunicipios1" Relationship="Self.FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id" FromRole="tbUsuarios" ToRole="tbMunicipios" />
+          <NavigationProperty Name="tbUsuarios1" Relationship="Self.FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id" FromRole="tbUsuarios" ToRole="tbUsuarios1" />
+          <NavigationProperty Name="tbUsuarios2" Relationship="Self.FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id" FromRole="tbUsuarios1" ToRole="tbUsuarios" />
+          <NavigationProperty Name="tbUsuarios11" Relationship="Self.FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id" FromRole="tbUsuarios" ToRole="tbUsuarios1" />
+          <NavigationProperty Name="tbUsuarios3" Relationship="Self.FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id" FromRole="tbUsuarios1" ToRole="tbUsuarios" />
+        </EntityType>
+        <Association Name="FK_dbo_tbMunicipios_tbDepartamentos_dep_Id">
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="1" />
+          <End Role="tbMunicipios" Type="Self.tbMunicipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamentos">
+              <PropertyRef Name="dep_Id" />
+            </Principal>
+            <Dependent Role="tbMunicipios">
+              <PropertyRef Name="dep_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="dep_UsuCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="0..1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="dep_UsuModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbMunicipios" Type="Self.tbMunicipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbMunicipios">
+              <PropertyRef Name="mun_UsuCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="0..1" />
+          <End Role="tbMunicipios" Type="Self.tbMunicipios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbMunicipios">
+              <PropertyRef Name="mun_UsuModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbUsuarios1" Type="Self.tbUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbUsuarios1">
+              <PropertyRef Name="usu_UsuCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="0..1" />
+          <End Role="tbUsuarios1" Type="Self.tbUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="usu_id" />
+            </Principal>
+            <Dependent Role="tbUsuarios1">
+              <PropertyRef Name="usu_UsuModificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarreterasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbDepartamentos" EntityType="Self.tbDepartamentos" />
+          <EntitySet Name="tbMunicipios" EntityType="Self.tbMunicipios" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" />
+          <AssociationSet Name="FK_dbo_tbMunicipios_tbDepartamentos_dep_Id" Association="Self.FK_dbo_tbMunicipios_tbDepartamentos_dep_Id">
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+            <End Role="tbMunicipios" EntitySet="tbMunicipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id" Association="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id" Association="Self.FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id" Association="Self.FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbMunicipios" EntitySet="tbMunicipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id" Association="Self.FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbMunicipios" EntitySet="tbMunicipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id" Association="Self.FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbUsuarios1" EntitySet="tbUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id" Association="Self.FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbUsuarios1" EntitySet="tbUsuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarreterasModelStoreContainer" CdmEntityContainer="CarreterasEntities">
+          <EntitySetMapping Name="tbDepartamentos">
+            <EntityTypeMapping TypeName="CarreterasModel.tbDepartamentos">
+              <MappingFragment StoreEntitySet="tbDepartamentos">
+                <ScalarProperty Name="dep_Id" ColumnName="dep_Id" />
+                <ScalarProperty Name="dep_Nombre" ColumnName="dep_Nombre" />
+                <ScalarProperty Name="dep_UsuCreacion" ColumnName="dep_UsuCreacion" />
+                <ScalarProperty Name="dep_FechaCreacion" ColumnName="dep_FechaCreacion" />
+                <ScalarProperty Name="dep_UsuModificacion" ColumnName="dep_UsuModificacion" />
+                <ScalarProperty Name="dep_FechaModificacion" ColumnName="dep_FechaModificacion" />
+                <ScalarProperty Name="dep_Estado" ColumnName="dep_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbMunicipios">
+            <EntityTypeMapping TypeName="CarreterasModel.tbMunicipios">
+              <MappingFragment StoreEntitySet="tbMunicipios">
+                <ScalarProperty Name="mun_id" ColumnName="mun_id" />
+                <ScalarProperty Name="mun_Nombre" ColumnName="mun_Nombre" />
+                <ScalarProperty Name="dep_Id" ColumnName="dep_Id" />
+                <ScalarProperty Name="mun_UsuCreacion" ColumnName="mun_UsuCreacion" />
+                <ScalarProperty Name="mun_FechaCreacion" ColumnName="mun_FechaCreacion" />
+                <ScalarProperty Name="mun_UsuModificacion" ColumnName="mun_UsuModificacion" />
+                <ScalarProperty Name="mun_FechaModificacion" ColumnName="mun_FechaModificacion" />
+                <ScalarProperty Name="mun_Estado" ColumnName="mun_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUsuarios">
+            <EntityTypeMapping TypeName="CarreterasModel.tbUsuarios">
+              <MappingFragment StoreEntitySet="tbUsuarios">
+                <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
+                <ScalarProperty Name="usu_Nombres" ColumnName="usu_Nombres" />
+                <ScalarProperty Name="usu_Apellidos" ColumnName="usu_Apellidos" />
+                <ScalarProperty Name="usu_Contrasena" ColumnName="usu_Contrasena" />
+                <ScalarProperty Name="usu_UsuCreacion" ColumnName="usu_UsuCreacion" />
+                <ScalarProperty Name="usu_FechaCreacion" ColumnName="usu_FechaCreacion" />
+                <ScalarProperty Name="usu_UsuModificacion" ColumnName="usu_UsuModificacion" />
+                <ScalarProperty Name="usu_FechaModificacion" ColumnName="usu_FechaModificacion" />
+                <ScalarProperty Name="usu_EsAdmin" ColumnName="usu_EsAdmin" />
+                <ScalarProperty Name="usu_Estado" ColumnName="usu_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

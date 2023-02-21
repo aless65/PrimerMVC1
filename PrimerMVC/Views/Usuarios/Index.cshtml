@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PrimerMVC.Models.tbUsuarios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="DataTable">
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_NombreUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_Contrasena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_FechaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_EsAdmin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usu_Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbUsuarios2.usu_NombreUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbUsuarios3.usu_NombreUsuario)
+        </th>
+        <th></th>
+    </tr>
+</thead>
+</tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_NombreUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_Contrasena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_FechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_FechaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_EsAdmin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usu_Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbUsuarios2.usu_NombreUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbUsuarios3.usu_NombreUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.usu_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.usu_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.usu_id })
+        </td>
+    </tr>
+}
+</tbody>
+</table>

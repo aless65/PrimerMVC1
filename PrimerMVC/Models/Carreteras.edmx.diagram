@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f4fb247cb7a24fbbb19d6cabfb5304af" Name="Diagram1">
+        <EntityTypeShape EntityType="CarreterasModel.tbDepartamentos" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarreterasModel.tbMunicipios" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarreterasModel.tbUsuarios" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="CarreterasModel.FK_dbo_tbMunicipios_tbDepartamentos_dep_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarreterasModel.FK_tbDepartamentos_tbUsuarios_dep_UsuCreacion_usu_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarreterasModel.FK_tbDepartamentos_tbUsuarios_dep_UsuModificacion_usu_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarreterasModel.FK_tbMunicipios_tbUsuarios_mun_UsuCreacion_usu_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarreterasModel.FK_tbMunicipios_tbUsuarios_mun_UsuModificacion_usu_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarreterasModel.FK_tbUsuarios_tbUsuarios_usu_UsuCreacion_usu_id" ManuallyRouted="false" />
+        <AssociationConnector Association="CarreterasModel.FK_tbUsuarios_tbUsuarios_usu_UsuModificacion_usu_id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

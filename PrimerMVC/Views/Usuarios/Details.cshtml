@@ -1,0 +1,99 @@
+﻿@model PrimerMVC.Models.tbUsuarios
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbUsuarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_Apellidos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_Apellidos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_Contrasena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_Contrasena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_FechaModificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_FechaModificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_EsAdmin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_EsAdmin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuarios2.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuarios2.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuarios3.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuarios3.usu_NombreUsuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.usu_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
